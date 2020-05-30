@@ -55,7 +55,7 @@ the authentication key would look like this:
 ```
 {
   "@context": "https://w3id.org/did/v1",
-  "id": "did:self:ad6a3d9f938e13cd947ec05abc7fe734df8dd8a2<b>#1</b>",
+  "id": "did:self:ad6a3d9f938e13cd947ec05abc7fe734df8dd8a2#1",
   "publicKey": [{
     "id": "did:self:ad6a3d9f938e13cd947ec05abc7fe734df8dd8a2#key2",
     "type: "ED25519SignatureVerification",
@@ -75,6 +75,31 @@ the authentication key would look like this:
   }
 }
 ```
-## Read
+Note that `id` is appended with `#1` and the proof has been generated using the key of the genesis document. 
+
+### Read
+The Read method receives as input a DID and a list of all DID documents that correspond to that DID (created using the create and then the update method). The document in the list are sorted by their
+serial number, in descending order. Therefore the first document in this list is the latest document,
+and the one the corresponds to the DID.
+
+In order to verify the validity of that document, the following algorithm is executed. 
+
+Let `top` be the serial number of the document on the top of the list, and `X|0 &#8804 X <= top` be the index of a document in the list. The verifier set $X = top$ and executes the following procedure 
+\begin{itemize}
+  \item if $X > 0$
+  \begin{enumerate}
+    \item Verify the serial number appended to the \emph{id} equals to $X$
+    \item Verify that the \emph{id} included in document excluding the serial number, equals to DID.
+    \item Verify the \emph{proof} included in the document  using the
+    authentication key of the document with index $X-1$
+    \item Decrease $X$ by one and repeat
+  \end{enumerate}
+  \item if $X = 0$
+  \begin{enumerate}
+    \item Verify that the \emph{id} included in document equals to  ``DID''
+    \item Verify that the DID is the hash of the authentication key
+    \item Verify the \emph{proof} included in the document using the authentication key of the genesis document. 
+  \end{enumerate}
+\end{itemize}  
 
 
