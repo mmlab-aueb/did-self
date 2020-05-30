@@ -79,27 +79,26 @@ Note that `id` is appended with `#1` and the proof has been generated using the 
 
 ### Read
 The Read method receives as input a DID and a list of all DID documents that correspond to that DID (created using the create and then the update method). The document in the list are sorted by their
-serial number, in descending order. Therefore the first document in this list is the latest document,
-and the one the corresponds to the DID.
+serial number, in ascending order. Therefore the first element of the list is the genesis document, followed by the first update, and so forth. The last document of the list the and the one that corresponds to the DID. In order to verify the validity of that document, the following algorithm is executed. 
 
-In order to verify the validity of that document, the following algorithm is executed. 
+```
+let top b the index of the last document in the list
+for (x = top; x > 0; x-- )
+{
+  assert document[x].id == DID + "#" + x
+  assert document[x].proof.verificationMethod ==
+     document[x-1].authentication.publickey
+  assert document[x].proof is valid
+} 
 
-Let `top` be the serial number of the document on the top of the list, and `X|0 &#8804 X <= top` be the index of a document in the list. The verifier set $X = top$ and executes the following procedure 
-\begin{itemize}
-  \item if $X > 0$
-  \begin{enumerate}
-    \item Verify the serial number appended to the \emph{id} equals to $X$
-    \item Verify that the \emph{id} included in document excluding the serial number, equals to DID.
-    \item Verify the \emph{proof} included in the document  using the
-    authentication key of the document with index $X-1$
-    \item Decrease $X$ by one and repeat
-  \end{enumerate}
-  \item if $X = 0$
-  \begin{enumerate}
-    \item Verify that the \emph{id} included in document equals to  ``DID''
-    \item Verify that the DID is the hash of the authentication key
-    \item Verify the \emph{proof} included in the document using the authentication key of the genesis document. 
-  \end{enumerate}
-\end{itemize}  
+/*
+ * x= 0 so now we verify the genesis document
+ */
+assert document[x].id == DID 
+assert document[x].id == last 20 bytes of document[x].authentication.publickey
+assert document[x].proof.verificationMethod ==
+     document[x].authentication.publickey
+  assert document[x].proof is valid
+```
 
 
