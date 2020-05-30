@@ -55,7 +55,7 @@ the authentication key would look like this:
 ```
 {
   "@context": "https://w3id.org/did/v1",
-  "id": "did:self:ad6a3d9f938e13cd947ec05abc7fe734df8dd8a2#1",
+  "id": "did:self:ad6a3d9f938e13cd947ec05abc7fe734df8dd8a2<b>#1</b>",
   "publicKey": [{
     "id": "did:self:ad6a3d9f938e13cd947ec05abc7fe734df8dd8a2#key2",
     "type: "ED25519SignatureVerification",
@@ -75,5 +75,6 @@ the authentication key would look like this:
   }
 }
 ```
+## Read
 
 
