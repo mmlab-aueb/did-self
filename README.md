@@ -48,10 +48,10 @@ the `new DID-document`, and a `self-did proof`. The self-did proof is
 signed using the private key that corresponds to the controller of the 
 **DID-document being replaced**.
 
-Proofs are stored in a list referred to as the **self-did proof chain**. If the provided
-new DID-document has the same `controller` as the one being replaced, then the last element
-of the  self-did proof chain is replaced with with the provided  self-did proof. Otherwise,
-the provided self-did proof is appended to the self-did proof chain.
+Proofs are stored in a list referred to as the **proof chain**. If the provided
+self-did proof has the same signer as the last element of the proof chain, then the last element
+of the chain is replaced with with the provided proof. Otherwise,
+the provided proof is appended to the proof chain.
 
 ### Read
 The Read method receives as input a DID, and outputs the latest version of the DID document and 
