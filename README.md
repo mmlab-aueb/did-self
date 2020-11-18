@@ -19,7 +19,12 @@ CRUD operations are implemented by a software library which is executed by the u
 ### Create
 The create operation accepts as input a DID, a `minimal DID-document`, and a `proof`. 
 The minimal DID document is a JSON file that MUST contain at least a `controller` field.
-The value of the `controller` field is equal to the DID. A proof is a compact encoded
+The value of the `controller` field is equal to the DID. Although it is possible to authenticate
+a controller based only on its DID, it is recommended that the DID-document includes an
+`authentication` field, which should include the controller key. Then, this field can be used by 
+legacy DID systems.
+
+A proof is a compact encoded
 JWS, using EdDSA and payload a JSON string with three fields: `did`, `controller`, and `sha-256`. 
 We refer to this proof as the **self-did proof**.
 
@@ -27,13 +32,27 @@ The self-did proof of the create method is signed using the private key that cor
 
 
 A minimal DID document and the corresponding self-did proof payload for the DID `did:self:6varD0RjXZfW58v4DGtd7kltX6Kzn9fghX94LvrMDxo` follows:
+
+DID document:
 ```
 {
-  "id": "did:self:6varD0RjXZfW58v4DGtd7kltX6Kzn9fghX94LvrMDxo", 
-  "controller": "did:self:6varD0RjXZfW58v4DGtd7kltX6Kzn9fghX94LvrMDxo"
+  "id": "did:self:GwJkufDcxEs9PN5-hILb1rcmD4GXCIohPvTuSdEOo9w", 
+  "controller": "did:self:GwJkufDcxEs9PN5-hILb1rcmD4GXCIohPvTuSdEOo9w", 
+  "authentication": [{
+    "id": "did:self:GwJkufDcxEs9PN5-hILb1rcmD4GXCIohPvTuSdEOo9w#key1", 
+    "type": "JsonWebKey2020", 
+    "controller": "did:self:GwJkufDcxEs9PN5-hILb1rcmD4GXCIohPvTuSdEOo9w", 
+    "publicKeyJwk": {
+      "crv": "Ed25519", 
+      "x": "GwJkufDcxEs9PN5-hILb1rcmD4GXCIohPvTuSdEOo9w", 
+      "kty": "OKP"
+      }
+  }]
 }
 
 ```
+
+self-did proof payload
 ```
 {
   "id": "did:self:6varD0RjXZfW58v4DGtd7kltX6Kzn9fghX94LvrMDxo", 
@@ -56,8 +75,8 @@ the provided proof is appended to the proof chain.
 ### Read
 The Read method receives as input a DID, and outputs the latest version of the DID document and 
 the self-did proof chain. The self-did proof chain is verified as follows:
-* First, verify that the last element of chain contains a valid payload.
-* Verify that the payload of all chain elements contains a `id` field with value equal to the DID.  
+* First, verify that the last element of the chain contains a valid payload.
+* Verify that the payload of all chain elements contain a `id` field with value equal to the DID.  
 * Then, for each element of the chain but the first, verify the signature using the 
 public key included in `controller` field of the payload of the **previous** element.
 * Finally, verify the signature of the first element of the chain using the key that corresponds to the
