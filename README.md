@@ -1,4 +1,4 @@
-# DID self method specification
+# did:self method specification
 ## Author
 * Nikos Fotiou, [Mobile Multimedia Laboratory, AUEB](https://mm.aueb.gr)
 
@@ -11,7 +11,7 @@ A Python3 [implementation](https://github.com/mmlab-aueb/did-self-py)
 
 Our [SCN4ND](https://mm.aueb.gr/scn4ndn/) project that uses did:self.
 
-## DID Method 
+## The did:self method 
 The name of this DID method is: `self`
 
 The method specific identifier is represented as the base64url value
