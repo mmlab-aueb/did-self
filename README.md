@@ -18,9 +18,14 @@ did:self:6varD0RjXZfW58v4DGtd7kltX6Kzn9fghX94LvrMDxo
 ```
 
 Each DID is associated with a DID document and a 
-list of proofs known as the `proof chain`. The DID document is a JSON-encoded file that must include at least
+list of proofs known as the `proof chain`. 
+
+The DID document is a JSON-encoded file that must include at least
 the `id` and the `controller` fields (as defined by [W3C's DID specification](https://www.w3.org/TR/did-core/)).
-For the controller field we are using the [did:key method](https://w3c-ccg.github.io/did-method-key/).
+The controller is an Ed25519 public key and we are using the [did:key method](https://w3c-ccg.github.io/did-method-key/)
+for representing them. Although the `id` and the `controller` fields are mandatory, they can use 
+the same Ed25519 public key. Additionally, when an `authentication` verification method is included in the
+DID document, it is used for authenticating the DID `subject`. 
 
 Every time a DID document is created or updated a proof is calculated
 and it is stored in the `proof chain`.
@@ -41,7 +46,41 @@ CRUD operations are implemented by the users.
 ### Create
 The Create operation initializes a did:self DID and creates an initial DID document. 
 The proof of the initial DID document is signed using the DID
-and it is the fist element of the proof chain. 
+and it is the fist element of the proof chain. The following is a valid DID document
+
+```json
+{
+  "id": "did:self:w5YDVbgF514CO3IuSNSFnTT2c96SKyjlc5nDX6PutMo",
+  "controller": "did:key:ur6sv17E5Bg_u7ZpVZk8qFFtiTg9ICbtXVrFffPzSpE8",
+  "authentication": [
+    {
+      "id": "did:self:w5YDVbgF514CO3IuSNSFnTT2c96SKyjlc5nDX6PutMo#key1",
+      "type": "JsonWebKey2020",
+      "controller": "did:self:w5YDVbgF514CO3IuSNSFnTT2c96SKyjlc5nDX6PutMo",
+      "publicKeyJwk": {
+        "crv": "Ed25519",
+        "x": "w5YDVbgF514CO3IuSNSFnTT2c96SKyjlc5nDX6PutMo",
+        "kty": "OKP"
+      }
+    }
+  ]
+}
+```
+
+The following is the corresponding proof payload
+
+```json
+{
+  "id": "did:self:w5YDVbgF514CO3IuSNSFnTT2c96SKyjlc5nDX6PutMo",
+  "controller": "did:key:ur6sv17E5Bg_u7ZpVZk8qFFtiTg9ICbtXVrFffPzSpE8",
+  "version": 1,
+  "sha-256": "OwNBSxVa_G-uaxmtTVlJD02FvKv9YMt4URVAT5IVzYs"
+}
+```
+
+The following is the proof chain after the invocation of the `Create` method. The signature
+of the proof can be verified using `w5YDVbgF514CO3IuSNSFnTT2c96SKyjlc5nDX6PutMo`, i.e., the key
+that corresponds to the DID.
 
 ### Update
 With the Update operation an existing DID document is replaced with a new one. 
@@ -53,7 +92,7 @@ then the last element of the chain is replaced with the new proof, otherwise the
 is appended to the proof chain.
 
 ### Read
-The \emph{Read} operation simply outputs the DID document and 
+The Read operation simply outputs the DID document and 
 the corresponding proof chain.
 
 ## DID document validation
