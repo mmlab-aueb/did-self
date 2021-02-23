@@ -2,10 +2,14 @@
 ## Author
 * Nikos Fotiou, [Mobile Multimedia Laboratory, AUEB](https://mm.aueb.gr)
 
-## Abstract
-The did self method enables DID document management without registries. Each
+## About
+The did:self method enables DID document management without registries. Each
 DID owner is responsible for maintaining their DID documents and the corresponding
 revision history.
+
+A Python3 [implementation](https://github.com/mmlab-aueb/did-self-py)
+
+Our [SCN4ND](https://mm.aueb.gr/scn4ndn/) project that uses did:self.
 
 ## DID Method 
 The name of this DID method is: `self`
