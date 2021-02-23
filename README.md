@@ -33,7 +33,7 @@ A proof is a compact encoded [JSON Web Signature (JWS)](https://tools.ietf.org/h
 The payload of the proof is a JSON string that includes four 
 fields: 
 
-* `did` The DID.
+* `id` The DID.
 * `controller` The controller of the DID document.
 * `version` A version number used for revoking deprecated documents.
 * `sha-256` The base64url encoded hash of the DID document, calculated using SHA-256.
@@ -153,7 +153,7 @@ whether or not the DID document is a valid document for the given DID
 using the following protocol.
 
 1. First, verify that the `sha-256` field of the payload of the last proof of the chain contains the hash of the DID document.
-1. As a next step, verify that the `did` field of the payload of all proofs of the chain is equal to the DID.
+1. As a next step, verify that the `id` field of the payload of all proofs of the chain is equal to the DID.
 1. Then, verify the first proof of the chain using the DID
 1. Finally, starting from the second proof of the chain, verify all proofs using the `controller` field of the payload of their previous proof.
 
