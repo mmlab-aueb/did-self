@@ -39,6 +39,7 @@ fields:
 
 * `id` The DID.
 * `controller` The controller of the DID document.
+* `created` The string value of an ISO8601 combined date and time string
 * `sha-256` The base64url encoded hash of the DID document, calculated using SHA-256.
 
 The signature of the proof is generated using EdDSA. 
@@ -53,16 +54,16 @@ and it is the fist element of the proof chain. The following is a valid DID docu
 
 ```JSON
 {
-  "id": "did:self:b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI",
-  "controller": "did:key:uHrHw64GaW9fVrx-QlB_1RFdJ73Jwo8a8E8ZadEQS04A",
+  "id": "did:self:nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU",
+  "controller": "did:key:z6MKGRqQ8Pb5ZKzUpXotN1NipJYQx2edHFR6aV2tREgJJMhL",
   "authentication": [
     {
-      "id": "did:self:b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI#key1",
+      "id": "did:self:nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU#key1",
       "type": "JsonWebKey2020",
       "publicKeyJwk": {
+        "kty": "OKP",
         "crv": "Ed25519",
-        "x": "b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI",
-        "kty": "OKP"
+        "x": "nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU"
       }
     }
   ]
@@ -73,19 +74,20 @@ The following is the corresponding proof payload
 
 ```JSON
 {
-  "id": "did:self:b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI",
-  "controller": "did:key:uHrHw64GaW9fVrx-QlB_1RFdJ73Jwo8a8E8ZadEQS04A",
-  "sha-256": "papnsiYT_7j2qbQ3zcHm9HHDX4UZNNApkzqm6Wj8_Ss"
+  "id": "did:self:nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU",
+  "controller": "did:key:z6MKGRqQ8Pb5ZKzUpXotN1NipJYQx2edHFR6aV2tREgJJMhL",
+  "created": "2021-03-10T22:59:54Z",
+  "sha-256": "2L5DctVFPBp_po3caEvwUmg1w5-NvTskH485fV8gwek"
 }
 ```
 
 The following is the proof chain after the invocation of the `Create` method. The signature
-of the proof can be verified using `b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI`, i.e., the key
+of the proof can be verified using `nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU`, i.e., the key
 that corresponds to the DID.
 
 ```
 [
-  "eyJhbGciOiJFZERTQSJ9.eyJpZCI6ICJkaWQ6c2VsZjpiOWV3THpsanBleENaRkJtX2xUd2NSa2pnbWpPMmdkcWg4RmxuZmJjZXpJIiwgImNvbnRyb2xsZXIiOiAiZGlkOmtleTp1SHJIdzY0R2FXOWZWcngtUWxCXzFSRmRKNzNKd284YThFOFphZEVRUzA0QSIsICJzaGEtMjU2IjogInBhcG5zaVlUXzdqMnFiUTN6Y0htOUhIRFg0VVpOTkFwa3pxbTZXajhfU3MifQ.yINGHRO7sAG2vEMmtoD1XW-QMguhH2xOGYdneWcMa-jQcfZZqksbGSZm7DZNpyk9eUcRoO420uROdPWgNew5CA"
+  "eyJhbGciOiAiRWREU0EifQ.eyJpZCI6ICJkaWQ6c2VsZjpuTHlNdV8zUjdJS25Ial9MamxMcGhaMVFXTXA0VTdWbGRjMHlhRkk3ZURVIiwgImNvbnRyb2xsZXIiOiAiZGlkOmtleTp6Nk1LR1JxUThQYjVaS3pVcFhvdE4xTmlwSllReDJlZEhGUjZhVjJ0UkVnSkpNaEwiLCAiY3JlYXRlZCI6ICIyMDIxLTAzLTEwVDIyOjU5OjU0WiIsICJzaGEtMjU2IjogIjJMNURjdFZGUEJwX3BvM2NhRXZ3VW1nMXc1LU52VHNrSDQ4NWZWOGd3ZWsifQ.epEVNpCsb4wP7R1xakBpkA_nMWJmC9JtPXyK4sAf5ub2ju-W-j86h3H1ISTPWJ-6zm5Ygf-yJ933hjQ_ajRsAQ"
 ]
 ```
 
@@ -102,16 +104,16 @@ The following is an update to the previous DID document, which modifies the cont
 
 ```JSON
 {
-  "id": "did:self:b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI",
-  "controller": "did:key:uNDBHNpMMueGdOYqgFmevrK1DFngbKZklsSKCeZzxs3g",
+  "id": "did:self:nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU",
+  "controller": "did:key:z6MKJ8owm1HAzMRUJAUNtuBcyhkMPRaCwa7XWTi86TvShf2w",
   "authentication": [
     {
-      "id": "did:self:b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI#key1",
+      "id": "did:self:nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU#key1",
       "type": "JsonWebKey2020",
       "publicKeyJwk": {
+        "kty": "OKP",
         "crv": "Ed25519",
-        "x": "b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI",
-        "kty": "OKP"
+        "x": "nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU"
       }
     }
   ]
@@ -123,23 +125,27 @@ The following is the corresponding proof payload
 ```JSON
 Proof payload:
 {
-  "id": "did:self:b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI",
-  "controller": "did:key:uNDBHNpMMueGdOYqgFmevrK1DFngbKZklsSKCeZzxs3g",
-  "sha-256": "AIx2JTPlXFSpgFbq54K2Mrgi3CIax-kxnG5i2oS-GzQ"
+  "id": "did:self:nLyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU",
+  "controller": "did:key:z6MKJ8owm1HAzMRUJAUNtuBcyhkMPRaCwa7XWTi86TvShf2w",
+  "created": "2021-03-10T22:59:54Z",
+  "sha-256": "CjzuQPolyxr4zsZTyuP1HXVMHzVSypmBwqFzsWy1iu4"
 }
 ```
+The proof is signed with the private key that corresponds to `did:key:z6MKGRqQ8Pb5ZKzUpXotN1NipJYQx2edHFR6aV2tREgJJMhL`,
+the key of the controller of
+DID document that was replaced
 
 The following is the proof chain after the invocation of the `Update` method. The signature
-of the first proof can be verified using `b9ewLzljpexCZFBm_lTwcRkjgmjO2gdqh8FlnfbcezI`, i.e., the key
-that corresponds to the DID. The signature of the second proof can be verified using 
-`HrHw64GaW9fVrx-QlB_1RFdJ73Jwo8a8E8ZadEQS04A`, i.e., the key of the controller of
+of the first proof can be verified using `LyMu_3R7IKnHj_LjlLphZ1QWMp4U7Vldc0yaFI7eDU`, i.e., the key
+that corresponds to the DID. The signature of the second proof can be verified using the key that corresponds to
+`did:key:z6MKGRqQ8Pb5ZKzUpXotN1NipJYQx2edHFR6aV2tREgJJMhL`, i.e., the key of the controller of
 DID document that was replaced: this key can be found in the payload of the first 
 signature.
 
 ```
 [
-  "eyJhbGciOiJFZERTQSJ9.eyJpZCI6ICJkaWQ6c2VsZjpiOWV3THpsanBleENaRkJtX2xUd2NSa2pnbWpPMmdkcWg4RmxuZmJjZXpJIiwgImNvbnRyb2xsZXIiOiAiZGlkOmtleTp1SHJIdzY0R2FXOWZWcngtUWxCXzFSRmRKNzNKd284YThFOFphZEVRUzA0QSIsICJzaGEtMjU2IjogInBhcG5zaVlUXzdqMnFiUTN6Y0htOUhIRFg0VVpOTkFwa3pxbTZXajhfU3MifQ.yINGHRO7sAG2vEMmtoD1XW-QMguhH2xOGYdneWcMa-jQcfZZqksbGSZm7DZNpyk9eUcRoO420uROdPWgNew5CA",
-  "eyJhbGciOiJFZERTQSJ9.eyJpZCI6ICJkaWQ6c2VsZjpiOWV3THpsanBleENaRkJtX2xUd2NSa2pnbWpPMmdkcWg4RmxuZmJjZXpJIiwgImNvbnRyb2xsZXIiOiAiZGlkOmtleTp1TkRCSE5wTU11ZUdkT1lxZ0ZtZXZySzFERm5nYktaa2xzU0tDZVp6eHMzZyIsICJzaGEtMjU2IjogIkFJeDJKVFBsWEZTcGdGYnE1NEsyTXJnaTNDSWF4LWt4bkc1aTJvUy1HelEifQ.tH3hqjpiKa6hTCYDyFJAGfssvalR5mGs8PWDPRook56iZyEnCg17St1L8b_B28yH9e-b_tlzLWTzfgFVAO05Bg"
+  "eyJhbGciOiAiRWREU0EifQ.eyJpZCI6ICJkaWQ6c2VsZjpuTHlNdV8zUjdJS25Ial9MamxMcGhaMVFXTXA0VTdWbGRjMHlhRkk3ZURVIiwgImNvbnRyb2xsZXIiOiAiZGlkOmtleTp6Nk1LR1JxUThQYjVaS3pVcFhvdE4xTmlwSllReDJlZEhGUjZhVjJ0UkVnSkpNaEwiLCAiY3JlYXRlZCI6ICIyMDIxLTAzLTEwVDIyOjU5OjU0WiIsICJzaGEtMjU2IjogIjJMNURjdFZGUEJwX3BvM2NhRXZ3VW1nMXc1LU52VHNrSDQ4NWZWOGd3ZWsifQ.epEVNpCsb4wP7R1xakBpkA_nMWJmC9JtPXyK4sAf5ub2ju-W-j86h3H1ISTPWJ-6zm5Ygf-yJ933hjQ_ajRsAQ",
+  "eyJhbGciOiAiRWREU0EifQ.eyJpZCI6ICJkaWQ6c2VsZjpuTHlNdV8zUjdJS25Ial9MamxMcGhaMVFXTXA0VTdWbGRjMHlhRkk3ZURVIiwgImNvbnRyb2xsZXIiOiAiZGlkOmtleTp6Nk1LSjhvd20xSEF6TVJVSkFVTnR1QmN5aGtNUFJhQ3dhN1hXVGk4NlR2U2hmMnciLCAiY3JlYXRlZCI6ICIyMDIxLTAzLTEwVDIyOjU5OjU0WiIsICJzaGEtMjU2IjogIkNqenVRUG9seXhyNHpzWlR5dVAxSFhWTUh6VlN5cG1Cd3FGenNXeTFpdTQifQ.YJG_EmOsVBWo1yp19MTYqN2tITkXjoibNFQyYghazGbDWS1Rcr1wryrSO36jmoSST6MVdf5KRaImuCNkwHt9DQ"
 ]
 ```
 
