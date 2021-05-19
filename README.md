@@ -9,7 +9,11 @@ revision history.
 
 A Python3 [implementation](https://github.com/mmlab-aueb/did-self-py)
 
-Our [SCN4ND](https://mm.aueb.gr/scn4ndn/) project that uses did:self.
+### Research
+* Our [SCN4ND](https://mm.aueb.gr/scn4ndn/) project that uses did:self.
+* Application of did:self in IPFS [N. Fotiou, V.A. Siris, G.C. Polyzos,
+"Enabling self-verifiable mutable content items in IPFS using Decentralized 
+Identifiers", in I2F: Decentralising the Internet with IPFS and Filecoin, IFIP Networking 2021 workshop](https://arxiv.org/abs/2105.08395)
 
 ## The did:self method 
 The name of this DID method is: `self`
