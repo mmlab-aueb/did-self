@@ -3,9 +3,11 @@
 * Nikos Fotiou, [Mobile Multimedia Laboratory, AUEB](https://mm.aueb.gr)
 
 ## About
-The did:self method enables DID document management without registries. Each
-DID owner is responsible for maintaining their DID documents and the corresponding
-revision history.
+did:self is a DID method that enables DID document management without registries. 
+A did:self identifier is an Ed25519 public key.
+The corresponding 
+DID document is protected by a "proof", which is a JSON Web Signature generated
+by the private key that corresponds to the did:self identifier.
 
 A Python3 [implementation](https://github.com/mmlab-aueb/did-self-py)
 
@@ -14,6 +16,8 @@ A Python3 [implementation](https://github.com/mmlab-aueb/did-self-py)
 * Application of did:self in IPFS [N. Fotiou, V.A. Siris, G.C. Polyzos,
 "Enabling self-verifiable mutable content items in IPFS using Decentralized 
 Identifiers", in DI2F: Decentralising the Internet with IPFS and Filecoin, IFIP Networking 2021 workshop](https://arxiv.org/abs/2105.08395)
+* Application of did:self in securing routing in Named Data Networking
+[N.Fotiou, Y. Thomas, V.A. Siris, G. Xylomenos and G.C. Polyzos, "Securing Named Data Networking routing using Decentralized Identifiers," iProc. SARNET-21 workshop, IEEE International Conference on High Performance Switching and Routing (HPSR), Paris, France, June 2021](https://mm.aueb.gr/publications/12279f1a-8166-4560-aead-56dfe90df93f.pdf)
 
 ## The did:self method 
 The name of this DID method is: `self`
