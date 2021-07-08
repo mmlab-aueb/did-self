@@ -17,7 +17,7 @@ A Python3 [implementation](https://github.com/mmlab-aueb/did-self-py)
 "Enabling self-verifiable mutable content items in IPFS using Decentralized 
 Identifiers", in DI2F: Decentralising the Internet with IPFS and Filecoin, IFIP Networking 2021 workshop](https://arxiv.org/abs/2105.08395)
 * Application of did:self in securing routing in Named Data Networking
-[N.Fotiou, Y. Thomas, V.A. Siris, G. Xylomenos and G.C. Polyzos, "Securing Named Data Networking routing using Decentralized Identifiers," iProc. SARNET-21 workshop, IEEE International Conference on High Performance Switching and Routing (HPSR), Paris, France, June 2021](https://mm.aueb.gr/publications/12279f1a-8166-4560-aead-56dfe90df93f.pdf)
+[N.Fotiou, Y. Thomas, V.A. Siris, G. Xylomenos and G.C. Polyzos, "Securing Named Data Networking routing using Decentralized Identifiers," in Proc. SARNET-21 workshop, IEEE International Conference on High Performance Switching and Routing (HPSR), Paris, France, June 2021](https://mm.aueb.gr/publications/12279f1a-8166-4560-aead-56dfe90df93f.pdf)
 
 ## The did:self method 
 The name of this DID method is: `self`
@@ -29,28 +29,34 @@ of an Ed25519 public key. e.g.,
 did:self:6varD0RjXZfW58v4DGtd7kltX6Kzn9fghX94LvrMDxo
 ```
 
-Each DID is associated with a DID document and a 
-list of proofs known as the `proof chain`. 
-
 The DID document is a JSON-encoded file that must include at least
-the `id` and the `controller` fields (as defined by [W3C's DID specification](https://www.w3.org/TR/did-core/)).
-The controller is an Ed25519 public key and we are using the [did:key method](https://w3c-ccg.github.io/did-method-key/)
-for representing them. Although the `id` and the `controller` fields are mandatory, they can use 
-the same Ed25519 public key. Additionally, when an `authentication` verification method is included in the
-DID document, it is used for authenticating the DID `subject`. 
+the `id` property.  
 
-Every time a DID document is created or updated a proof is calculated
-and it is stored in the `proof chain`.
-A proof is a compact encoded [JSON Web Signature (JWS)](https://tools.ietf.org/html/rfc7515).
-The payload of the proof is a JSON string that includes four 
+The integrity of a DID document is verified using a 
+`document proof`. A `document proof` is a compact encoded 
+[JSON Web Signature (JWS)](https://tools.ietf.org/html/rfc7515).
+The payload of the proof is a JSON string that includes at least the following 
 fields: 
 
 * `id` The DID.
-* `controller` The controller of the DID document.
 * `created` The string value of an ISO8601 combined date and time string
 * `sha-256` The base64url encoded hash of the DID document, calculated using SHA-256.
 
-The signature of the proof is generated using EdDSA. 
+The signature of the proof is an EdDSA signature which is generated 
+by the did:self DID `controller`. If the `controller` is also the did:self 
+DID `owner`, the signature is generated using the private key that corresponds 
+to the did:self DID. Otherwise, the signature is generated using a private key
+owned by the `controller`. In the latter case an additional
+`authorization` proof is required to prove that the controller key is
+authorized by the DID owner to sign a DID document proof. An authorization proof 
+is also a JWS, which is signed by the did:self DID owner, and its payload is 
+a JSON string that includes the following fields:
+
+* `id` The DID.
+* `created` The string value of an ISO8601 combined date and time string
+* `sha-256` The base64url encoded hash of the DID document, calculated using SHA-256.
+* `controller` The public key of the controller encoded as a JSON Web Key. 
+
 
 ## CRUD Operation Definitions
 CRUD operations are implemented by the users. 
