@@ -68,6 +68,7 @@ CRUD operations are implemented by the users.
 The Create operation initializes a did:self DID and creates a DID document. 
 The proof of the DID document is signed using the using the 
 private key that corresponds to the did:self DID.
+
 The following is a valid DID document
 
 ```JSON
@@ -106,6 +107,7 @@ The following is the decoded proof header
     "y": "lxDZvayjRUH4r1HghIg0ZoknlWyqaATwsWtJazcUCRw"
   }
 }
+```
 
 The following is the decoded proof payload
 
