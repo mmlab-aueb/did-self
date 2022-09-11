@@ -1,6 +1,6 @@
 # did:self method specification
 ## Author
-* [Nikos Fotiou](https://www.fotiou.gr), [Mobile Multimedia Laboratory, AUEB](https://mm.aueb.gr), [ExcID](https://www.excid.io)
+* [Nikos Fotiou](https://www.fotiou.gr), [MMLab/AUEB](https://mm.aueb.gr), [ExcID](https://www.excid.io)
 
 ## About
 did:self is a DID method that enables DID document management without registries. 
@@ -8,7 +8,7 @@ A did:self identifier is the thumbprint of a JWK as defined in [RFC 7638](https:
 The corresponding  DID document is protected by a "proof", which is a JSON Web Signature generated
 by the private key that corresponds to the did:self identifier.
 
-A Python3 [implementation](https://github.com/mmlab-aueb/did-self-py)
+A Python3 [implementation](https://github.com/excid-io/did-self-py)
 
 ### Research
 * The [SECOND](https://mm.aueb.gr/projects/second) project that uses did:self.
