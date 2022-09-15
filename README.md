@@ -1,3 +1,7 @@
+# Repository moved
+did:self method specifications have been moved to [https://github.com/excid-io/did-self](https://github.com/excid-io/did-self). 
+This repository is only used as an archive.
+
 # did:self method specification
 ## Author
 * [Nikos Fotiou](https://www.fotiou.gr), [MMLab/AUEB](https://mm.aueb.gr), [ExcID](https://www.excid.io)
